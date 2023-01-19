@@ -1,0 +1,57 @@
+<h5>Farms List</h5>
+<div class="row">
+  <div class="col-md-6">
+    <!-- This is the filter: by No and by Active Date -->
+    <div class="form-group">
+      <label for="filterDowpDown">Filter By</label>
+      <select
+        id="filterDowpDown"
+        class="form-control"
+        [ngModel]="selectedFilter"
+        (ngModelChange)="onFilterChange($event)"
+      >
+        <option *ngFor="let f of filterOptions" [ngValue]="f">
+          {{ f.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-outline-danger btn-sm">Error Button</button>
+  </div>
+</div>
+<div class="row mt-2">
+  <table
+    mat-table
+    [dataSource]="selectedFilter ? filterSource : dataSource"
+    class="mat-elevation-z8 col-12"
+  >
+    <!--- Note that these columns can be defined in any order.
+					The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="FarmNo">
+      <th mat-header-cell *matHeaderCellDef>Farm No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.FarmNo }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="FarmName">
+      <th mat-header-cell *matHeaderCellDef>Farm Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.FarmName }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="ActiveDate">
+      <th mat-header-cell *matHeaderCellDef>Active Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.ActiveDate }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<div class="row">
+  <!-- The sf grid should be here -->
+</div>
